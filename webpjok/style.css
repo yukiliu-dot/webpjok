@@ -1,0 +1,140 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+.hero {
+    /* Background dasar jika gambar belum dimuat */
+    background-color: #5e4adc;
+    
+    /* Ganti 'background.jpg' dengan nama file gambar Anda */
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    overflow: hidden;
+}
+
+/* Overlay untuk memastikan teks tetap terbaca di atas gambar */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(94, 74, 220, 0.7); /* Overlay ungu transparan */
+    z-index: 1;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo-circle {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-inner {
+    width: 20px;
+    height: 20px;
+    background-color: #5e4adc;
+    border-radius: 50%;
+}
+
+.nav-links {
+    display: flex;
+}
+
+.nav-links a {
+    margin-left: 40px;
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 2;
+    transform: scale(1.2);
+}
+
+.hero-content {
+    max-width: 800px;
+    text-align: center;
+    z-index: 10;
+}
+
+.hero-title {
+    font-size: 80px;
+    font-weight: bold;
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.ampersand {
+    font-size: 100px;
+    font-style: italic;
+    display: block;
+    margin: -20px 0;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .navbar {
+        padding: 20px;
+        flex-direction: column;
+    }
+    
+    .nav-links {
+        margin-top: 20px;
+    }
+    
+    .nav-links a {
+        margin: 0 10px;
+        font-size: 14px;
+    }
+    
+    .hero-title {
+        font-size: 40px;
+    }
+    
+    .ampersand {
+        font-size: 50px;
+        margin: -10px 0;
+    }
+}
