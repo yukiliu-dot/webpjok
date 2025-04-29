@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pendidikan Jasmani & Olahraga Kesehatan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #F8F8F8;
+            color: #104B7F;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 100;
+            transition: all 0.3s ease;
+            background-color: rgba(248, 248, 248, 0.95);
+        }
+
+        .navbar.scrolled {
+            box-shadow: 0 4px 15px rgba(16, 75, 127, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-circle {
+            width: 40px;
+            height: 40px;
+            background-color: #104B7F;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-inner {
+            width: 20px;
+            height: 20px;
+            background-color: #F8F8F8;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            font-weight: 700;
+            font-size: 18px;
+            color: #104B7F;
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links a {
+            margin-left: 40px;
+            color: #104B7F;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: #104B7F;
+            left: 0;
+            bottom: -5px;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #104B7F;
+        }
+
+        /* Home Page Styles */
+        .hero {
+            background-color: #F8F8F8;
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            text-align: center;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .hero-title {
+            font-size: 64px;
+            font-weight: bold;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            color: #104B7F;
+        }
+
+        .ampersand {
+            font-size: 80px;
+            font-style: italic;
+            display: inline-block;
+            opacity: 0.9;
+            margin: 0 8px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #104B7F;
+            opacity: 0.8;
+        }
+
+        .hero-bg {
+            position: absolute;
+            bottom: -5%;
+            right: -5%;
+            width: 50%;
+            height: 50%;
+            background-color: rgba(16, 75, 127, 0.05);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .hero-bg-2 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 40%;
+            height: 40%;
+            background-color: rgba(16, 75, 127, 0.03);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Guru Section Styles */
+        .guru-section {
+            padding: 120px 20px 80px;
+            background-color: #F8F8F8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            color: #104B7F;
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: bold;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: #104B7F;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .guru-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .guru-card {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(16, 75, 127, 0.08);
+            padding-bottom: 20px;
+        }
+
+        .guru-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(16, 75, 127, 0.15);
+        }
+
+        .guru-image {
+            width: 100%;
+            aspect-ratio: 1/1;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .guru-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .guru-card:hover .guru-image img {
+            transform: scale(1.05);
+        }
+
+        .guru-name {
+            color: #104B7F;
+            font-weight: bold;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .guru-description {
+            color: #104B7F;
+            opacity: 0.7;
+            font-size: 14px;
+            text-align: center;
+            line-height: 1.4;
+            padding: 0 15px;
+        }
+
+        /* Materi Section Styles */
+        .materi-section {
+            padding: 100px 20px 80px;
+            background-color: rgba(16, 75, 127, 0.03);
+        }
+
+        .materi-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .materi-card {
+            cursor: pointer;
+            background-color: #FFFFFF;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(16, 75, 127, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .materi-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(16, 75, 127, 0.15);
+        }
+
+        .materi-icon {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(16, 75, 127, 0.05);
+        }
+
+        .materi-icon svg {
+            width: 60px;
+            height: 60px;
+            fill: #104B7F;
+        }
+
+        .materi-content {
+            padding: 25px;
+        }
+
+        .materi-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #104B7F;
+        }
+
+        .materi-description {
+            font-size: 14px;
+            color: #104B7F;
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* Credit Section Styles */
+        .credit-section {
+            padding: 100px 20px 80px;
+            background-color: #F8F8F8;
+            text-align: center;
+        }
+
+        .credit-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .team-members {
+            display: flex;
+            justify-content: center;
+            gap: 50px;
+            margin-top: 60px;
+            flex-wrap: wrap;
+        }
+
+        .team-member {
+            width: 200px;
+            text-align: center;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            background-color: rgba(16, 75, 127, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #104B7F;
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        .team-name {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 5px;
+            color: #104B7F;
+        }
+
+        .team-role {
+            font-size: 14px;
+            color: #104B7F;
+            opacity: 0.7;
+            margin-bottom: 12px;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            text-decoration: none;
+            color: #104B7F;
+            font-size: 14px;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            opacity: 0.8;
+        }
+
+        .social-link svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(16, 75, 127, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            background-color: #FFFFFF;
+            width: 90%;
+            max-width: 900px;
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            transform: scale(0.8);
+            transition: transform 0.3s;
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: scale(1);
+        }
+
+        .popup-image {
+            flex: 0 0 40%;
+            min-height: 300px;
+        }
+
+        .popup-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .popup-details {
+            flex: 0 0 60%;
+            padding: 40px;
+            color: #104B7F;
+        }
+
+        .popup-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .popup-text {
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        .popup-quote {
+            font-style: italic;
+            margin-top: 20px;
+            padding-left: 20px;
+            border-left: 3px solid rgba(16, 75, 127, 0.2);
+        }
+
+        .close-popup {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #FFFFFF;
+            color: #104B7F;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 20px;
+            border: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: rgba(16, 75, 127, 0.03);
+            padding: 30px 20px;
+            text-align: center;
+            color: #104B7F;
+            font-size: 14px;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1024px) {
+            .guru-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .materi-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .team-members {
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 40px;
+            }
+            
+            .ampersand {
+                font-size: 50px;
+            }
+            
+            .materi-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .popup-content {
+                flex-direction: column;
+            }
+            
+            .popup-image, .popup-details {
+                flex: 0 0 100%;
+            }
+            
+            .popup-image {
+                min-height: 200px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .guru-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .team-member {
+                width: 100%;
+                max-width: 200px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">
+            <div class="logo-circle">
+                <div class="logo-inner"></div>
+            </div>
+            <div class="logo-text">PENJAS</div>
+        </div>
+        
+        <div class="nav-links">
+            <a href="#home">HOME</a>
+            <a href="#guru">GURU</a>
+            <a href="#materi">MATERI</a>
+            <a href="#credit">CREDIT</a>
+        </div>
+        
+        <button class="mobile-nav-toggle">☰</button>
+    </div>
+    
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-bg-2"></div>
+        <!-- Hero Content -->
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Pendidikan Jasmani<span class="ampersand">&</span>Olahraga Kesehatan
+            </h1>
+            <p class="hero-subtitle">Mengembangkan kecerdasan fisik untuk kesehatan dan prestasi optimal</p>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2025 Pendidikan Jasmani & Olahraga Kesehatan. All rights reserved.</p>
+    </footer>
+    
+    <!-- Popup Guru -->
+    <div id="guru1" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-image">
+                <img src="/api/placeholder/400/400" alt="Sugeng">
+            </div>
+            <div class="popup-details">
+                <h2 class="popup-title">SUGENG</h2>
+                <div class="popup-text">
+                    <p>SUGENG adalah pakar Pendidikan Jasmani dengan pengalaman lebih dari 8 tahun membantu berbagai institusi pendidikan mencapai tujuan mereka. Spesialisasi beliau mencakup pengembangan kurikulum olahraga yang inklusif dan inovatif.</p>
+                    
+                    <p>Beliau memiliki gelar Magister Pendidikan Olahraga dan telah mendapatkan berbagai penghargaan dari asosiasi pendidikan jasmani nasional.</p>
+                    
+                    <div class="popup-quote">
+                        "Tubuh sehat adalah fondasi dari pikiran yang cemerlang" - Motto yang selalu dipegang teguh dalam setiap programnya.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="close-popup" onclick="closePopup('guru1')">×</button>
+    </div>
+    
+    <div id="guru2" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-image">
+                <img src="/api/placeholder/400/400" alt="Roman">
+            </div>
+            <div class="popup-details">
+                <h2 class="popup-title">ROMAN</h2>
+                <div class="popup-text">
+                    <p>ROMAN adalah ahli ilmu olahraga dengan pengalaman lebih dari 10 tahun dalam bidang pelatihan performa atlet. Beliau telah melatih berbagai atlet nasional dan internasional.</p>
+                    
+                    <p>Metode pelatihannya yang berbasis data dan teknologi telah membantu banyak atlet mencapai performa puncak mereka pada kompetisi tingkat nasional dan internasional.</p>
+                    
+                    <div class="popup-quote">
+                        "Keunggulan adalah kebiasaan, bukan tindakan" - Filosofi yang diterapkan dalam setiap sesi pelatihannya.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="close-popup" onclick="closePopup('guru2')">×</button>
+    </div>
+    
+    <div id="guru3" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-image">
+                <img src="/api/placeholder/400/400" alt="Gunawan">
+            </div>
+            <div class="popup-details">
+                <h2 class="popup-title">GUNAWAN</h2>
+                <div class="popup-text">
+                    <p>GUNAWAN adalah spesialis nutrisi dengan pengalaman 12 tahun dalam perencanaan diet atlet. Fokus penelitiannya pada optimalisasi nutrisi untuk performa olahraga dan pemulihan cedera.</p>
+                    
+                    <p>Beliau telah menerbitkan berbagai artikel ilmiah tentang nutrisi olahraga dan secara rutin memberikan konsultasi untuk tim nasional di berbagai cabang olahraga.</p>
+                    
+                    <div class="popup-quote">
+                        "Makananmu adalah obatmu, dan obatmu adalah makananmu" - Prinsip yang menjadi dasar konsultasi nutrisi individualnya.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="close-popup" onclick="closePopup('guru3')">×</button>
+    </div>
+    
+    <div id="guru4" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-image">
+                <img src="/api/placeholder/400/400" alt="Bobby">
+            </div>
+            <div class="popup-details">
+                <h2 class="popup-title">BOBBY</h2>
+                <div class="popup-text">
+                    <p>BOBBY adalah terapis fisik berpengalaman 15 tahun dalam teknik rehabilitasi. Beliau dikenal dengan pendekatan holistiknya yang menggabungkan teknik modern dan tradisional.</p>
+                    
+                    <p>Keahliannya dalam membantu atlet pulih dari cedera dan mencegah cedera berulang telah membuat beliau menjadi salah satu terapis fisik yang paling dicari di kalangan atlet profesional.</p>
+                    
+                    <div class="popup-quote">
+                        "Pemulihan yang baik adalah bagian dari performa yang hebat" - Keyakinan yang mendasari praktik terapinya.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="close-popup" onclick="closePopup('guru4')">×</button>
+    </div>
+    
+    <!-- Popup Materi -->
+    <div id="materi1" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-image" style="background-color: rgba(16, 75, 127, 0.05); display: flex; justify-content: center; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="#104B7F">
+                    <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2zm-4-8c0 2.2 1.8 4 4 4s4-1.8 4-4-1.8-4-4-4-4 1.8-4 4z"/>
+                </svg>
+            </div>
+            <div class="popup-details">
+                <h2 class="popup-title">Kebugaran Jasmani</h2>
+                <div class="popup-text">
+                    <p>Materi ini mencakup konsep dan praktik untuk meningkatkan dan mengukur komponen kebugaran jasmani, termasuk:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                        <li>Kekuatan (strength)</li>
+                        <li>Ketahanan (endurance)</li>
+                        <li>Kelentukan (flexibility)</li>
+                        <li>Kecepatan (speed)</li>
+                        <li>Kelincahan (agility)</li>
+                        <li>Keseimbangan (balance)</li>
+                    </ul>
+                    <p>Siswa akan mempelajari berbagai jenis tes kebugaran jasmani dan program latihan yang efektif untuk meningkatkan kebugaran sesuai dengan kebutuhan individu.</p>
+                </div>
+            </div>
+        </div>
+        <button class="close-popup" onclick="closePopup('materi1')">×</button>
+    </div>
+    
+    <div id="materi2" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-image" style="background-color: rgba(16, 75, 127, 0.05); display: flex; justify-content: center; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="#104B7F">
+                    <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+                </svg>
+            </div>
+            <div class="popup-details">
+                <h2 class="popup-title">Permainan & Olahraga</h2>
+                <div class="popup-text">
+                    <p>Materi ini memperkenalkan siswa pada beragam olahraga tim dan individu untuk mengembangkan keterampilan motorik, koordinasi, dan kerja sama.</p>
+                    <p>Olahraga tim yang dipelajari meliputi:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                        <li>Sepak bola</li>
+                        <li>Bola basket</li>
+                        <li>Bola voli</li>
+                    </ul>
+                    <p>Olahraga individu yang dipelajari meliputi:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                        <li>Atletik</li>
+                        <li>Senam</li>
+                        <li>Beladiri</li>
+                    </ul>
+                    <p>Fokus utama adalah pada pemahaman taktik, teknik dasar, dan pengembangan sportivitas.</p>
+                </div>
+            </div>
+        </div>
+        <button class="close-popup" onclick="closePopup('materi2')">×</button>
+    </div>
+    
+    <div id="materi3" class="popup-overlay">
+        <div class="popup-content">
+            <div class="popup-image" style="background-color: rgba(16, 75, 127, 0.05); display: flex; justify-content: center; align-items: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 24 24" fill="#104B7F">
+                    <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                </svg>
+            </div>
+            <div class="popup-details">
+                <h2 class="popup-title">Kesehatan Olahraga</h2>
+                <div class="popup-text">
+                    <p>Materi ini mempelajari prinsip-prinsip dasar untuk menjaga kesehatan tubuh melalui aktivitas fisik yang tepat, mencakup:</p>
+                    <ul style="margin-left: 20px; margin-top: 10px; margin-bottom: 10px;">
+                        <li>Anatomi dasar tubuh manusia</li>
+                        <li>Prinsip pemanasan dan pendinginan</li>
+                        <li>Pencegahan dan penanganan cedera</li>
+                        <li>Nutrisi olahraga</li>
+                        <li>Pemulihan dan manajemen stres</li>
+                    </ul>
+                    <p>Siswa akan belajar bagaimana menjaga kesehatan fisik secara optimal melalui kombinasi latihan yang tepat, nutrisi seimbang, dan istirahat yang cukup.</p>
+                </div>
+            </div>
+        </div>
+        <button class="close-popup" onclick="closePopup('materi3')">×</button>
+    </div>
+    
+    <script>
+        // Popup JS
+        function openPopup(id) {
+            document.getElementById(id).classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closePopup(id) {
+            document.getElementById(id).classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        // Close popup when clicking outside the content
+        const popups = document.querySelectorAll('.popup-overlay');
+        popups.forEach(popup => {
+            popup.addEventListener('click', function(event) {
+                if (event.target === popup) {
+                    popup.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        });
+        
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        if (mobileNavToggle) {
+            mobileNavToggle.addEventListener('click', function() {
+                navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            });
+        }
+    </script>
+    
+    <!-- Guru Section -->
+    <section id="guru" class="guru-section">
+        <div class="container">
+            <h1 class="section-title">GURU</h1>
+            
+            <div class="guru-grid">
+                <!-- Guru 1 -->
+                <div class="guru-card" onclick="openPopup('guru1')">
+                    <div class="guru-image">
+                        <img src="/api/placeholder/400/400" alt="Sugeng">
+                    </div>
+                    <h3 class="guru-name">SUGENG</h3>
+                    <p class="guru-description">Pakar Pendidikan Jasmani dengan 8+ tahun pengalaman</p>
+                </div>
+                
+                <!-- Guru 2 -->
+                <div class="guru-card" onclick="openPopup('guru2')">
+                    <div class="guru-image">
+                        <img src="/api/placeholder/400/400" alt="Roman">
+                    </div>
+                    <h3 class="guru-name">ROMAN</h3>
+                    <p class="guru-description">Ahli ilmu olahraga dengan 10+ tahun pelatihan performa</p>
+                </div>
+                
+                <!-- Guru 3 -->
+                <div class="guru-card" onclick="openPopup('guru3')">
+                    <div class="guru-image">
+                        <img src="/api/placeholder/400/400" alt="Gunawan">
+                    </div>
+                    <h3 class="guru-name">GUNAWAN</h3>
+                    <p class="guru-description">Spesialis nutrisi dengan 12+ tahun perencanaan diet atlet</p>
+                </div>
+                
+                <!-- Guru 4 -->
+                <div class="guru-card" onclick="openPopup('guru4')">
+                    <div class="guru-image">
+                        <img src="/api/placeholder/400/400" alt="Bobby">
+                    </div>
+                    <h3 class="guru-name">BOBBY</h3>
+                    <p class="guru-description">Terapis fisik dengan 15+ tahun teknik rehabilitasi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Materi Section -->
+    <section id="materi" class="materi-section">
+        <div class="container">
+            <h1 class="section-title">MATERI</h1>
+            
+            <div class="materi-grid">
+                <!-- Materi 1 -->
+                <div class="materi-card" onclick="openPopup('materi1')">
+                    <div class="materi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2zm-4-8c0 2.2 1.8 4 4 4s4-1.8 4-4-1.8-4-4-4-4 1.8-4 4z"/>
+                        </svg>
+                    </div>
+                    <div class="materi-content">
+                        <h3 class="materi-title">Kebugaran Jasmani</h3>
+                        <p class="materi-description">Latihan dan pengukuran untuk meningkatkan komponen kebugaran jasmani.</p>
+                    </div>
+                </div>
+                
+                <!-- Materi 2 -->
+                <div class="materi-card" onclick="openPopup('materi2')">
+                    <div class="materi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+                        </svg>
+                    </div>
+                    <div class="materi-content">
+                        <h3 class="materi-title">Permainan & Olahraga</h3>
+                        <p class="materi-description">Berbagai olahraga tim dan individu untuk pengembangan keterampilan dan kerja sama.</p>
+                    </div>
+                </div>
+                
+                <!-- Materi 3 -->
+                <div class="materi-card" onclick="openPopup('materi3')">
+                    <div class="materi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                        </svg>
+                    </div>
+                    <div class="materi-content">
+                        <h3 class="materi-title">Kesehatan Olahraga</h3>
+                        <p class="materi-description">Prinsip-prinsip dasar untuk menjaga kesehatan tubuh melalui aktivitas fisik yang tepat.</p>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="materi-grid">
+                <!-- Materi 1 -->
+                <div class="materi-card" onclick="openPopup('materi1')">
+                    <div class="materi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 2c-5.33 4.55-8 8.48-8 11.8 0 4.98 3.8 8.2 8 8.2s8-3.22 8-8.2c0-3.32-2.67-7.25-8-11.8zm0 18c-3.35 0-6-2.57-6-6.2 0-2.34 1.95-5.44 6-9.14 4.05 3.7 6 6.79 6 9.14 0 3.63-2.65 6.2-6 6.2zm-4-8c0 2.2 1.8 4 4 4s4-1.8 4-4-1.8-4-4-4-4 1.8-4 4z"/>
+                        </svg>
+                    </div>
+                    <div class="materi-content">
+                        <h3 class="materi-title">Kebugaran Jasmani</h3>
+                        <p class="materi-description">Latihan dan pengukuran untuk meningkatkan komponen kebugaran jasmani.</p>
+                    </div>
+                </div>
+                
+                <!-- Materi 2 -->
+                <div class="materi-card" onclick="openPopup('materi2')">
+                    <div class="materi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M12 6v3l4-4-4-4v3c-4.42 0-8 3.58-8 8 0 1.57.46 3.03 1.24 4.26L6.7 14.8c-.45-.83-.7-1.79-.7-2.8 0-3.31 2.69-6 6-6zm6.76 1.74L17.3 9.2c.44.84.7 1.79.7 2.8 0 3.31-2.69 6-6 6v-3l-4 4 4 4v-3c4.42 0 8-3.58 8-8 0-1.57-.46-3.03-1.24-4.26z"/>
+                        </svg>
+                    </div>
+                    <div class="materi-content">
+                        <h3 class="materi-title">Permainan & Olahraga</h3>
+                        <p class="materi-description">Berbagai olahraga tim dan individu untuk pengembangan keterampilan dan kerja sama.</p>
+                    </div>
+                </div>
+                
+                <!-- Materi 3 -->
+                <div class="materi-card" onclick="openPopup('materi3')">
+                    <div class="materi-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                            <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
+                        </svg>
+                    </div>
+                    <div class="materi-content">
+                        <h3 class="materi-title">Kesehatan Olahraga</h3>
+                        <p class="materi-description">Prinsip-prinsip dasar untuk menjaga kesehatan tubuh melalui aktivitas fisik yang tepat.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Credit Section -->
+    <section id="credit" class="credit-section">
+        <div class="credit-container">
+            <h1 class="section-title">CREDIT</h1>
+            
+            <div class="team-members">
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="avatar">AR</div>
+                    <h3 class="team-name">Ahmad Riza</h3>
+                    <p class="team-role">UI/UX Designer</p>
+                    <a href="https://instagram.com/ahmdriza" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        @ahmdriza
+                    </a>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="avatar">BS</div>
+                    <h3 class="team-name">Budi Santoso</h3>
+                    <p class="team-role">Web Developer</p>
+                    <a href="https://instagram.com/budisantoso" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        @budisantoso
+                    </a>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-member">
+                    <div class="avatar">DR</div>
+                    <h3 class="team-name">Dina Rahayu</h3>
+                    <p class="team-role">Content Manager</p>
+                    <a href="https://instagram.com/dinarahayu" class="social-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                        @dinarahayu
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
